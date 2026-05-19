@@ -44,7 +44,7 @@ export function TimelineBlock({ block, index, isActive, isPast }: TimelineBlockP
         `}
         style={{
           borderColor: isActive ? meta.color : `${meta.color}25`,
-          ringColor: isActive ? meta.color : undefined,
+          boxShadow: isActive ? `0 0 0 2px ${meta.color}` : undefined,
           background: `linear-gradient(135deg, ${meta.color}08 0%, transparent 60%)`,
         }}
         onClick={() => setExpanded(!expanded)}
