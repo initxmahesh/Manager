@@ -5,10 +5,10 @@ export const taskSchema = z.object({
   time_slot: z.string().min(1, 'Time slot is required'),
   task_name: z.string().min(1, 'Task name is required'),
   category: z.enum(['loksewa', 'software', 'life', 'review'], {
-    errorMap: () => ({ message: 'Category must be one of: loksewa, software, life, review' }),
+    message: 'Category must be one of: loksewa, software, life, review',
   }),
   day_type: z.enum(['weekday', 'saturday', 'sunday'], {
-    errorMap: () => ({ message: 'Day type must be one of: weekday, saturday, sunday' }),
+    message: 'Day type must be one of: weekday, saturday, sunday',
   }),
   completed: z.boolean().default(false),
   notes: z.string().default(''),
@@ -19,7 +19,7 @@ export const taskUpdateSchema = taskSchema.partial();
 export const loksewaSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in YYYY-MM-DD format'),
   subject: z.enum(['Networking', 'Constitution & Law', 'GK', 'Electronics', 'Telecom Systems', 'Management'], {
-    errorMap: () => ({ message: 'Subject must be one of: Networking, Constitution & Law, GK, Electronics, Telecom Systems, Management' }),
+    message: 'Subject must be one of: Networking, Constitution & Law, GK, Electronics, Telecom Systems, Management',
   }),
   topic: z.string().default(''),
   questions_attempted: z.number().int().min(1, 'Must attempt at least 1 question'),
@@ -48,13 +48,13 @@ export const jobSchema = z.object({
   company: z.string().min(1, 'Company name is required'),
   role: z.string().min(1, 'Role is required'),
   location: z.enum(['Nepal', 'Remote'], {
-    errorMap: () => ({ message: 'Location must be Nepal or Remote' }),
+    message: 'Location must be Nepal or Remote',
   }),
   platform: z.enum(['LinkedIn', 'Merojob', 'Direct', 'Other'], {
-    errorMap: () => ({ message: 'Platform must be one of: LinkedIn, Merojob, Direct, Other' }),
+    message: 'Platform must be one of: LinkedIn, Merojob, Direct, Other',
   }),
   status: z.enum(['Applied', 'Interviewing', 'Offer', 'Rejected', 'Ghosted'], {
-    errorMap: () => ({ message: 'Status must be one of: Applied, Interviewing, Offer, Rejected, Ghosted' }),
+    message: 'Status must be one of: Applied, Interviewing, Offer, Rejected, Ghosted',
   }),
   salary_offered: z.string().default(''),
   follow_up_date: z.string().default(''),
