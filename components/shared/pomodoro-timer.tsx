@@ -146,7 +146,7 @@ export function PomodoroTimer() {
                 'h-5 w-5 rounded-full text-[10px] flex items-center justify-center transition-all',
                 theme === t ? 'scale-125 ring-2 ring-offset-1 ring-offset-background' : 'opacity-50 hover:opacity-100'
               )}
-              style={{ ringColor: THEMES[t].accent }}
+              style={{ '--tw-ring-color': THEMES[t].accent } as React.CSSProperties}
             >
               {THEMES[t].emoji}
             </button>

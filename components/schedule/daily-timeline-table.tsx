@@ -167,7 +167,7 @@ function BlockCard({ block, index, isActive, isPast, completedTasks, onToggleTas
       )}
       style={{
         animationDelay: `${index * 50}ms`,
-        ...(isActive ? { ringColor: meta.color } : {}),
+        ...(isActive ? { '--tw-ring-color': meta.color } as React.CSSProperties : {}),
       }}
     >
       {/* Block Header */}
