@@ -1,6 +1,7 @@
 import { google } from 'googleapis';
 import { JWT } from 'google-auth-library';
-import { DailyTask, LoksewaEntry, JobApplication, WeeklyGoal } from './types';
+import { DailyTask, LoksewaEntry, JobApplication, WeeklyGoal, ScheduleCompletion } from './types';
+import { LoksewaTopic, StudySession, WeakTopic } from './loksewa-types';
 import { SHEET_NAMES } from './constants';
 
 function getAuthClient(): JWT {
@@ -244,4 +245,114 @@ export function serializeWeekly(goal: WeeklyGoal): string[] {
   ];
 }
 
+// Schedule Tracking helpers
+export function parseScheduleCompletionRow(row: string[]): ScheduleCompletion {
+  return {
+    id: row[0] || '',
+    date: row[1] || '',
+    weekday: row[2] || '',
+    block_id: row[3] || '',
+    block_title: row[4] || '',
+    category: (row[5] as ScheduleCompletion['category']) || 'life',
+    task_index: parseInt(row[6]) || 0,
+    task_name: row[7] || '',
+    completed: row[8]?.toUpperCase() === 'TRUE',
+    completed_at: row[9] || '',
+    day_type: row[10] || '',
+  };
+}
+
+export function serializeScheduleCompletion(entry: ScheduleCompletion): string[] {
+  return [
+    entry.id,
+    entry.date,
+    entry.weekday,
+    entry.block_id,
+    entry.block_title,
+    entry.category,
+    String(entry.task_index),
+    entry.task_name,
+    entry.completed ? 'TRUE' : 'FALSE',
+    entry.completed_at,
+    entry.day_type,
+  ];
+}
+
 export { SHEET_NAMES };
+
+// ─── Loksewa Topics helpers ─────────────────────────────────────────────────
+
+export function parseLoksewaTopicRow(row: string[]): LoksewaTopic {
+  return {
+    id: row[0] || '',
+    subject_id: row[1] || '',
+    topic_name: row[2] || '',
+    status: (row[3] as LoksewaTopic['status']) || 'not_started',
+    times_wrong: parseInt(row[4]) || 0,
+    last_studied: row[5] || '',
+    notes: row[6] || '',
+  };
+}
+
+export function serializeLoksewaTopic(topic: LoksewaTopic): string[] {
+  return [
+    topic.id,
+    topic.subject_id,
+    topic.topic_name,
+    topic.status,
+    String(topic.times_wrong),
+    topic.last_studied,
+    topic.notes,
+  ];
+}
+
+// ─── Study Session helpers (uses loksewa_tracker sheet) ─────────────────────
+
+export function parseStudySessionRow(row: string[]): StudySession {
+  return {
+    id: row[0] || '',
+    date: row[1] || '',
+    subject_id: row[2] || '',
+    topic: row[3] || '',
+    session_type: (row[4] as StudySession['session_type']) || 'deep_study',
+    time_spent_min: parseInt(row[5]) || 0,
+    confidence: parseInt(row[6]) || 3,
+    questions_attempted: parseInt(row[7]) || 0,
+    questions_correct: parseInt(row[8]) || 0,
+    score_percent: parseFloat(row[9]) || 0,
+    weak_topics: row[10] || '',
+    notes: row[11] || '',
+  };
+}
+
+export function serializeStudySession(session: StudySession): string[] {
+  return [
+    session.id,
+    session.date,
+    session.subject_id,
+    session.topic,
+    session.session_type,
+    String(session.time_spent_min),
+    String(session.confidence),
+    String(session.questions_attempted),
+    String(session.questions_correct),
+    String(session.score_percent),
+    session.weak_topics,
+    session.notes,
+  ];
+}
+
+// ─── Weak Topic helpers ─────────────────────────────────────────────────────
+
+export function parseWeakTopicRow(row: string[]): WeakTopic {
+  return {
+    id: row[0] || '',
+    topic_name: row[1] || '',
+    subject_id: row[2] || '',
+    times_wrong: parseInt(row[3]) || 0,
+    priority: (row[4] as WeakTopic['priority']) || 'low',
+    status: (row[5] as WeakTopic['status']) || 'needs_review',
+    date_added: row[6] || '',
+    notes: row[7] || '',
+  };
+}

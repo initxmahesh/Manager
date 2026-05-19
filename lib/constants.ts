@@ -57,6 +57,8 @@ export const TIME_SLOTS = [
 export const SHEET_NAMES = {
   DAILY_TASKS: 'daily_tasks',
   LOKSEWA_TRACKER: 'loksewa_tracker',
+  LOKSEWA_TOPICS: 'loksewa_topics',
   JOB_APPLICATIONS: 'job_applications',
   WEEKLY_GOALS: 'weekly_goals',
+  SCHEDULE_TRACKING: 'schedule_tracking',
 } as const;

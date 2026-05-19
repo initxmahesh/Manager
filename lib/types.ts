@@ -54,3 +54,19 @@ export interface WeeklyGoal {
   notes: string;
   completed: boolean;
 }
+
+export type ScheduleCategory = 'loksewa' | 'software' | 'mental' | 'life';
+
+export interface ScheduleCompletion {
+  id: string;
+  date: string;              // YYYY-MM-DD
+  weekday: string;           // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+  block_id: string;          // e.g. "mwf-2"
+  block_title: string;       // e.g. "Loksewa — Technical"
+  category: ScheduleCategory;
+  task_index: number;        // which task within the block
+  task_name: string;         // the task text
+  completed: boolean;
+  completed_at: string;      // ISO timestamp
+  day_type: string;          // mwf, tth, saturday, sunday
+}

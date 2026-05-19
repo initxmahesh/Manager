@@ -10,6 +10,9 @@ import { TodayTimeline } from '@/components/dashboard/today-timeline';
 import { QuickAddFab } from '@/components/dashboard/quick-add-fab';
 import { WeeklySidebar } from '@/components/dashboard/weekly-sidebar';
 import { FollowUpList } from '@/components/dashboard/follow-up-list';
+import { StreakHeatmap } from '@/components/dashboard/streak-heatmap';
+import { DailyIntention } from '@/components/dashboard/daily-intention';
+import { ExamCountdown } from '@/components/dashboard/exam-countdown';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AddTaskForm } from '@/components/schedule/add-task-form';
 import { AddEntryForm } from '@/components/loksewa/add-entry-form';
@@ -33,10 +36,18 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
+      {/* Stats Bar */}
       <StatsBar tasks={tasks} jobs={jobs} loksewa={loksewa} loading={loading} />
 
+      {/* Intention + Countdown Row */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <DailyIntention />
+        <ExamCountdown />
+      </div>
+
+      {/* Main Content */}
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Today&apos;s Schedule</CardTitle>
@@ -49,6 +60,9 @@ export default function DashboardPage() {
               />
             </CardContent>
           </Card>
+
+          {/* Streak Heatmap */}
+          <StreakHeatmap />
         </div>
 
         <div className="space-y-4">

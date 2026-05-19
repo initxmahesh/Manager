@@ -20,6 +20,7 @@ const HEADERS = {
   loksewa_tracker: ['id', 'date', 'subject', 'topic', 'questions_attempted', 'questions_correct', 'score_percent', 'mock_exam', 'weak_areas', 'notes'],
   job_applications: ['id', 'date_applied', 'company', 'role', 'location', 'platform', 'status', 'salary_offered', 'follow_up_date', 'notes', 'link'],
   weekly_goals: ['id', 'week_start_date', 'goal_loksewa', 'goal_software', 'goal_jobs_target', 'jobs_applied', 'loksewa_mock_score', 'notes', 'completed'],
+  schedule_tracking: ['id', 'date', 'weekday', 'block_id', 'block_title', 'category', 'task_index', 'task_name', 'completed', 'completed_at', 'day_type'],
 };
 
 async function main() {
