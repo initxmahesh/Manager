@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Calendar, BookOpen, Briefcase, Target } from 'lucide-react';
+import { LayoutDashboard, Calendar, BookOpen, Briefcase, Target, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -11,6 +11,7 @@ const navItems = [
   { href: '/loksewa', label: 'Loksewa', icon: BookOpen },
   { href: '/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/weekly', label: 'Weekly', icon: Target },
+  { href: '/syllabus', label: 'Syllabus', icon: FileText },
 ];
 
 interface SidebarProps {
